@@ -44,7 +44,7 @@ stages:
     - upload: manifests
       artifact: manifests
 
-- stage: UAT Environment
+- stage: UATEnvironment
   displayName: UAT Environment (User Acceptance Testing) stage
   dependsOn: Build
 
@@ -53,7 +53,7 @@ stages:
     displayName: UAT Environment
     pool:
       vmImage: $(vmImageName)
-    environment: 'UAT Environment'
+    environment: 'UATEnvironment'
     strategy:
       runOnce:
         deploy:
@@ -81,16 +81,16 @@ stages:
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
 
-- stage: Pre Prod
+- stage: PreProd
   displayName: Pre-Production stage
-  dependsOn: UAT Environment
+  dependsOn: UATEnvironment
 
   jobs:
   - deployment: PreProd
     displayName: Pre Prod
     pool:
       vmImage: $(vmImageName)
-    environment: 'Pre Prod'
+    environment: 'PreProd'
     strategy:
       runOnce:
         deploy:
@@ -118,16 +118,16 @@ stages:
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
 
-- stage: Production Environment
+- stage: ProductionEnvironment
   displayName: Production Environment
-  dependsOn: Pre Prod
+  dependsOn: PreProd
 
   jobs:
   - deployment: ProductionEnvironment
     displayName: Production Environment
     pool:
       vmImage: $(vmImageName)
-    environment: 'Production Environment'
+    environment: 'ProductionEnvironment'
     strategy:
       runOnce:
         deploy:
