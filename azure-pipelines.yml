@@ -79,7 +79,7 @@ stages:
 
 
 
-- stage: Deploy to prod
+- stage: ProductionEnv
   displayName: Deploy stage
   dependsOn: Build
 
