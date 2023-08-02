@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: dotnet-sj
+  name: dotnet-deployment-sj
   namespace: default
 spec:
   selector:
-    app: dotnet-sj
+    app: dotnet-deployment-sj
   ports:
     - protocol: TCP
       port: 80
