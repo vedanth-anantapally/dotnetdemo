@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnet-deployment-sj
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dotnet-sj
+  template:
+    metadata:
+      labels:
+        app: dotnet-sj
+    spec:
+      containers:
+      - name: dotnet
+        image: completedotnetsampleapp.azurecr.io/dotnet:2.0
+        ports:
+        - containerPort: 5000
+
