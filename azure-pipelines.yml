@@ -52,7 +52,7 @@ stages:
               action: deploy
               manifests: |
                 $(Pipeline.Workspace)/deployment.yaml
-                $(Pipeline.Workspace)/service.yml
+                $(Pipeline.Workspace)/service.yaml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
