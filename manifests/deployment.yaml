@@ -7,11 +7,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dotnet-sj
+      app: dotnet-deployment-sj
   template:
     metadata:
       labels:
-        app: dotnet-sj
+        app: dotnet-deployment-sj
     spec:
       containers:
       - name: dotnet
