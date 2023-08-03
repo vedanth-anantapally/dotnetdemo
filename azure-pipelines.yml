@@ -65,51 +65,62 @@ stages:
               secretName: $(imagePullSecret)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
 
-          - task: KubernetesManifest@0
-            displayName: Deploy to Kubernetes cluster
+          - task: HelmDeploy@0
             inputs:
-              action: deploy
-              manifests: |
-                $(Pipeline.Workspace)/manifests/deployment.yaml
-                $(Pipeline.Workspace)/manifests/service.yaml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
+              connectionType: 'Azure Resource Manager'
+              azureSubscription: 'Free Trial(c7895ff6-00b1-4f16-a93c-b0da4ac86e2a)'
+              azureResourceGroup: 'Kubernetescluster'
+              kubernetesCluster: 'sample-helm'
+              command: 'upgrade'
+              chartType: 'Name'
+              chartName: 'Chart.yaml'
+              valueFile: 'values.yaml'
+
+          # - task: KubernetesManifest@0
+          #   displayName: Deploy to Kubernetes cluster
+          #   inputs:
+          #     action: deploy
+          #     manifests: |
+          #       $(Pipeline.Workspace)/manifests/deployment.yaml
+          #       $(Pipeline.Workspace)/manifests/service.yaml
+          #     imagePullSecrets: |
+          #       $(imagePullSecret)
+          #     containers: |
+          #       $(containerRegistry)/$(imageRepository):$(tag)
 
 
 
-- stage: ProductionEnv
-  displayName: Deploy stage
-  dependsOn: Build
+# - stage: ProductionEnv
+#   displayName: Deploy stage
+#   dependsOn: Build
 
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    pool:
-      vmImage: $(vmImageName)
-    environment: 'ProductionEnv.default'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: KubernetesManifest@0
-            displayName: Create imagePullSecret
-            inputs:
-              action: createSecret
-              secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+  # jobs:
+  # - deployment: Deploy
+  #   displayName: Deploy
+  #   pool:
+  #     vmImage: $(vmImageName)
+  #   environment: 'ProductionEnv.default'
+  #   strategy:
+  #     runOnce:
+  #       deploy:
+  #         steps:
+  #         - task: KubernetesManifest@0
+  #           displayName: Create imagePullSecret
+  #           inputs:
+  #             action: createSecret
+  #             secretName: $(imagePullSecret)
+  #             dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
 
-          - task: KubernetesManifest@0
-            displayName: Deploy to Kubernetes cluster
-            inputs:
-              action: deploy
-              manifests: |
-                $(Pipeline.Workspace)/manifests/deployment.yaml
-                $(Pipeline.Workspace)/manifests/service.yaml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
+  #         # - task: KubernetesManifest@0
+  #         #   displayName: Deploy to Kubernetes cluster
+  #         #   inputs:
+  #         #     action: deploy
+  #         #     manifests: |
+  #         #       $(Pipeline.Workspace)/manifests/deployment.yaml
+  #         #       $(Pipeline.Workspace)/manifests/service.yaml
+  #         #     imagePullSecrets: |
+  #         #       $(imagePullSecret)
+  #         #     containers: |
+  #         #       $(containerRegistry)/$(imageRepository):$(tag)
 
 
