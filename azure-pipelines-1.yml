@@ -84,8 +84,8 @@ stages:
               kubernetesCluster: 'sample-helm'
               command: 'upgrade'
               chartType: FilePath
-              chartPath: $(Pipeline.Workspace)   
-              valueFile: values.yaml
+              chartPath: $(Build.SourcesDirectory)   
+              valueFile: $(Build.SourcesDirectory)/values.yaml
 
           
 
