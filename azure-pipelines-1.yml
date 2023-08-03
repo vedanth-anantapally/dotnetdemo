@@ -83,7 +83,10 @@ stages:
               azureResourceGroup: 'Kubernetescluster'
               kubernetesCluster: 'sample-helm'
               command: 'upgrade'
-              chartType: 'Name'
-              chartName: 'Chart.yaml'
-              valueFile: 'values.yaml'
+              chartType: FilePath
+              chartPath: $(Pipeline.Workspace)   
+              valueFile: $(Pipeline.Workspace)/values.yaml
+
+          
+
 
