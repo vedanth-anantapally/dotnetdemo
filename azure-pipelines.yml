@@ -11,7 +11,7 @@ resources:
 variables:
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '61bd1c6f-fd77-4574-9397-dc54b943cd58'
+  dockerRegistryServiceConnection: 'c7895ff6-00b1-4f16-a93c-b0da4ac86e2a'
   imageRepository: 'dotnet'
   containerRegistry: 'samplehelmrepo.azurecr.io'
   dockerfilePath: '**/Dockerfile'
