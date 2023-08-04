@@ -112,7 +112,7 @@ stages:
               kubernetesCluster: 'sample-helm'
               command: 'install'  # Use "install" command instead of "upgrade"
               chartType: 'Name'   # Set the chart type to "Name"
-              chartName: 'dotnet-demo'  # Specify the name of the chart
+              chartName: '$(Pipeline.Workspace)/manifests/dotnet-demo.tgz'  # Specify the name of the chart
               valuesFile: '$(Pipeline.Workspace)/manifests/values.yaml'
 
 
