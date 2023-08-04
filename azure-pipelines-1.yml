@@ -91,7 +91,7 @@ stages:
               kubernetesCluster: 'sample-helm'
               command: 'upgrade'
               chartType: FilePath
-              chartPath: $(Pipeline.Workspace)/manifests/Chart.yaml.gz
+              chartPath: $(Pipeline.Workspace)/manifests/dotnet-demo-0.1.0.tgz
               valueFile: $(Pipeline.Workspace)/manifests/values.yaml
 
           
