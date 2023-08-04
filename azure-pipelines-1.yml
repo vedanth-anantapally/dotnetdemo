@@ -92,7 +92,7 @@ stages:
               command: 'upgrade'
               chartType: FilePath
               chartPath: '$(Pipeline.Workspace)/manifests/dotnet-demo-0.1.0.tgz'
-              # valuesFile: $(Pipeline.Workspace)/manifests/values.yaml
+              valuesFile: '$(Pipeline.Workspace)/manifests/values.yaml'
 
           
 
