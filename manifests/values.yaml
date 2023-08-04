@@ -1,4 +1,4 @@
-# Default values for dotnet-container.
+# Default values for sample-dotnet-helm.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -10,10 +10,10 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "1.0"
 
-imagePullSecrets: 
-  - name: completedotnetsampleapp7086bd71-auth
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+labels: {}
 
 serviceAccount:
   # Specifies whether a service account should be created
