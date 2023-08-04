@@ -83,6 +83,16 @@ stages:
           #       $(imagePullSecret)
           #     containers: |
           #       $(containerRegistry)/$(imageRepository):$(tag)
+          # - task: HelmDeploy@0
+          #   inputs:
+          #     connectionType: 'Azure Resource Manager'
+          #     azureSubscription: 'Free Trial(c7895ff6-00b1-4f16-a93c-b0da4ac86e2a)'
+          #     azureResourceGroup: 'Kubernetescluster'
+          #     kubernetesCluster: 'sample-helm'
+          #     command: 'upgrade'
+          #     chartType: FilePath
+          #     chartPath: '$(Pipeline.Workspace)/manifests/dotnet-demo-0.1.0.tgz'
+          #     valuesFile: '$(Pipeline.Workspace)/manifests/values.yaml'
           - task: HelmDeploy@0
             inputs:
               connectionType: 'Azure Resource Manager'
@@ -90,17 +100,9 @@ stages:
               azureResourceGroup: 'Kubernetescluster'
               kubernetesCluster: 'sample-helm'
               command: 'upgrade'
-              chartType: FilePath
-              chartPath: '$(Pipeline.Workspace)/manifests/dotnet-demo-0.1.0.tgz'
-              overrideValues: |
-                replicaCount=1
-                image.repository=samplehelmrepo.azurecr.io/dotnet
-                image.pullPolicy=IfNotPresent
-                image.tag=1.0
-                service.type=LoadBalancer
-                service.port=5000
-                service.targetport=5000
-                labels=""
+              chartType: 'Name'
+              chartName: 'chart.yaml'
+              valueFile: 'values.yaml'
 
 
           
