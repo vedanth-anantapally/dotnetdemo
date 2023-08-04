@@ -104,28 +104,28 @@ stages:
           #     chartName: 'chart.yaml'
           #     valueFile: 'values.yaml'
 
-          # - task: HelmDeploy@0
-          #   inputs:
-          #     connectionType: 'Azure Resource Manager'
-          #     azureSubscription: 'Free Trial(c7895ff6-00b1-4f16-a93c-b0da4ac86e2a)'
-          #     azureResourceGroup: 'Kubernetescluster'
-          #     kubernetesCluster: 'sample-helm'
-          #     command: 'upgrade'  # Use "install" command instead of "upgrade"
-          #     chartType: 'Name'   # Set the chart type to "Name"
-          #     chartName: '$(Pipeline.Workspace)/manifests/dotnet-demo.tgz'  # Specify the name of the chart
-          #     # valuesFile: '$(Pipeline.Workspace)/manifests/values.yaml'
-          
-        
           - task: HelmDeploy@0
             inputs:
               connectionType: 'Azure Resource Manager'
               azureSubscription: 'Free Trial(c7895ff6-00b1-4f16-a93c-b0da4ac86e2a)'
               azureResourceGroup: 'Kubernetescluster'
               kubernetesCluster: 'sample-helm'
-              command: 'upgrade'  # Use "upgrade" command instead of "install"
-              chartType: 'FilePath'   # Set the chart type to "FilePath"
-              chartPath: '$(Pipeline.Workspace)/manifests/dotnet-demo.tgz'  # Specify the path to the chart package
-              # valuesFile: '$(Pipeline.Workspace)/manifests/values.yaml'  # Uncomment and provide the path to your values.yaml file
+              command: 'install'  # Use "install" command instead of "upgrade"
+              chartType: 'Name'   # Set the chart type to "Name"
+              chartName: '$(Pipeline.Workspace)/manifests/dotnet-demo.tgz'  # Specify the name of the chart
+              valuesFile: '$(Pipeline.Workspace)/manifests/values.yaml'
+          
+        
+          # - task: HelmDeploy@0
+          #   inputs:
+          #     connectionType: 'Azure Resource Manager'
+          #     azureSubscription: 'Free Trial(c7895ff6-00b1-4f16-a93c-b0da4ac86e2a)'
+          #     azureResourceGroup: 'Kubernetescluster'
+          #     kubernetesCluster: 'sample-helm'
+          #     command: 'upgrade'  # Use "upgrade" command instead of "install"
+          #     chartType: 'FilePath'   # Set the chart type to "FilePath"
+          #     chartPath: '$(Pipeline.Workspace)/manifests/dotnet-demo.tgz'  # Specify the path to the chart package
+          #     # valuesFile: '$(Pipeline.Workspace)/manifests/values.yaml'  # Uncomment and provide the path to your values.yaml file
 
 
 
