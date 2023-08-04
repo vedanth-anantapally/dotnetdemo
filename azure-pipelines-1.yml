@@ -92,7 +92,16 @@ stages:
               command: 'upgrade'
               chartType: FilePath
               chartPath: '$(Pipeline.Workspace)/manifests/dotnet-demo-0.1.0.tgz'
-              valuesFile: '$(Pipeline.Workspace)/manifests/values.yaml'
+              overrideValues: |
+                replicaCount=1
+                image.repository=samplehelmrepo.azurecr.io/dotnet
+                image.pullPolicy=IfNotPresent
+                image.tag=1.0
+                service.type=LoadBalancer
+                service.port=5000
+                service.targetport=5000
+                labels=""
+
 
           
 
